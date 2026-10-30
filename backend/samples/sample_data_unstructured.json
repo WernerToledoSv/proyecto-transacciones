@@ -1,0 +1,82 @@
+[
+  {
+    "charge_id": "ch_3abc123",
+    "amount_cents": 15000,
+    "currency": "usd",
+    "charge_status": "succeeded",
+    "created_at": 1729000000,
+    "customer_email": "juan@example.com"
+  },
+  {
+    "transaction_id": "PAYID-ABC123",
+    "gross_amount": "75.50",
+    "currency_code": "EUR",
+    "payment_status": "Completed",
+    "time_created": "2024-03-15T10:30:00Z",
+    "payer_email": "ana@mail.com"
+  },
+  {
+    "reference_number": "TRF-2024-001",
+    "transfer_amount": 2500.75,
+    "transfer_currency": "cop",
+    "status_code": "ACCP",
+    "value_date": "2024-04-20",
+    "beneficiary": "Banco del Sur"
+  },
+  {
+    "charge_id": "ch_3def456",
+    "amount_cents": -1000,
+    "currency": "usd",
+    "charge_status": "failed",
+    "created_at": 1729100560,
+    "customer_email": "marta@example.com"
+  },
+  {
+    "transaction_id": "PAYID-XYZ789",
+    "gross_amount": "18.00",
+    "currency_code": "usd",
+    "payment_status": "Pending",
+    "time_created": "2024-05-01T15:45:00-05:00",
+    "payer_email": "pedro@example.com"
+  },
+  {
+    "reference_number": "TRF-2024-002",
+    "transfer_amount": 4000,
+    "transfer_currency": "USD",
+    "status_code": "RJCT",
+    "value_date": "2024-06-11",
+    "beneficiary": "Empresa X"
+  },
+  {
+    "charge_id": "ch_3ghi999",
+    "amount_cents": 21000,
+    "currency": "mxn",
+    "charge_status": "pending",
+    "created_at": 1730000000,
+    "customer_email": "lucia@example.com"
+  },
+  {
+    "transaction_id": "PAYID-QWE321",
+    "gross_amount": "200.00",
+    "currency_code": "COP",
+    "payment_status": "Refunded",
+    "time_created": "2024-02-10T08:00:00Z",
+    "payer_email": "carlos@example.com"
+  },
+  {
+    "reference_number": "TRF-2024-003",
+    "transfer_amount": 1500,
+    "transfer_currency": "ars",
+    "status_code": "PDNG",
+    "value_date": "2024-08-25",
+    "beneficiary": "Inversiones SA"
+  },
+  {
+    "charge_id": "ch_3jkl777",
+    "amount_cents": 5000,
+    "currency": "usd",
+    "charge_status": "refunded",
+    "created_at": 1731000000,
+    "customer_email": "sofia@example.com"
+  }
+]

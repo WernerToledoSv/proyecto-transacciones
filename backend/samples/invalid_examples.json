@@ -1,0 +1,25 @@
+[
+  {
+    "nota": "Este archivo contiene casos que deben generar registros inválidos."
+  },
+  {
+    "charge_id": "ch_no_amount",
+    "currency": "usd",
+    "charge_status": "succeeded",
+    "created_at": 1698500000
+  },
+  {
+    "transaction_id": "PAYID-BAD-DATE",
+    "gross_amount": "50.00",
+    "currency_code": "USD",
+    "payment_status": "Completed",
+    "time_created": "not-a-date"
+  },
+  {
+    "reference_number": "TRF-BAD-CURR",
+    "transfer_amount": 100,
+    "transfer_currency": "INVALID_CURRENCY_CODE",
+    "status_code": "ACCP",
+    "value_date": "2024-01-01"
+  }
+]

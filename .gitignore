@@ -1,0 +1,61 @@
+# ─────────────────────────────────────────────
+# Python / Backend
+# ─────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# Entornos virtuales
+.venv/
+venv/
+env/
+ENV/
+
+# Variables de entorno locales
+backend/.env
+
+# Caché de herramientas de Python
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+
+# ─────────────────────────────────────────────
+# Node / Frontend
+# ─────────────────────────────────────────────
+node_modules/
+frontend/dist/
+frontend/.angular/
+
+# Variables de entorno locales de Node
+frontend/.env
+frontend/.env.local
+frontend/.env.development.local
+frontend/.env.production.local
+
+# ─────────────────────────────────────────────
+# IDEs y editores
+# ─────────────────────────────────────────────
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+.DS_Store
+Thumbs.db
+
+# ─────────────────────────────────────────────
+# Logs y temporales
+# ─────────────────────────────────────────────
+*.log
+npm-debug.log*
+yarn-error.log*
+*.tmp
+*.bak

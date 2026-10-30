@@ -1,0 +1,36 @@
+[
+  {
+    "transaction_id": "PAYID-MXK001",
+    "gross_amount": "120.50",
+    "currency_code": "MXN",
+    "payment_status": "Completed",
+    "time_created": "2024-03-15T10:30:00Z",
+    "payer_email": "juan@example.com",
+    "item_name": "Suscripción mensual"
+  },
+  {
+    "transaction_id": "PAYID-MXK002",
+    "gross_amount": "45.00",
+    "currency_code": "USD",
+    "payment_status": "Pending",
+    "time_created": "2024-03-16T08:00:00Z",
+    "payer_email": "maria@example.com",
+    "item_name": "Compra única"
+  },
+  {
+    "transaction_id": "PAYID-MXK003",
+    "gross_amount": "200.00",
+    "currency_code": "EUR",
+    "payment_status": "Refunded",
+    "time_created": "2024-03-17T14:20:00Z",
+    "payer_email": "carlos@example.com",
+    "refund_reason": "item_not_received"
+  },
+  {
+    "transaction_id": "PAYID-MXK004",
+    "gross_amount": "not-a-number",
+    "currency_code": "USD",
+    "payment_status": "Completed",
+    "time_created": "2024-03-18T09:00:00Z"
+  }
+]

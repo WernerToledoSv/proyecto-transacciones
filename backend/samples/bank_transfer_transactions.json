@@ -1,0 +1,39 @@
+{
+  "transactions": [
+    {
+      "reference_number": "TRF-2024-001",
+      "transfer_amount": 5000000.00,
+      "transfer_currency": "COP",
+      "status_code": "ACSC",
+      "value_date": "2024-03-10",
+      "originator_name": "Empresa XYZ S.A.S.",
+      "beneficiary_account": "001-123456-78",
+      "bank_reference": "BCO-REF-9900"
+    },
+    {
+      "reference_number": "TRF-2024-002",
+      "transfer_amount": 1250.00,
+      "transfer_currency": "USD",
+      "status_code": "PDNG",
+      "value_date": "2024-03-11",
+      "originator_name": "John Doe",
+      "beneficiary_account": "002-654321-00"
+    },
+    {
+      "reference_number": "TRF-2024-003",
+      "transfer_amount": 750.00,
+      "transfer_currency": "EUR",
+      "status_code": "RJCT",
+      "value_date": "2024-03-12",
+      "originator_name": "Hans Müller",
+      "rejection_reason": "INVALID_ACCOUNT"
+    },
+    {
+      "reference_number": "TRF-2024-004",
+      "transfer_amount": 300.00,
+      "transfer_currency": "GBP",
+      "status_code": "UNKNOWN_CODE",
+      "value_date": "2024-03-13"
+    }
+  ]
+}

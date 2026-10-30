@@ -1,0 +1,35 @@
+[
+  {
+    "charge_id": "ch_mix001",
+    "amount_cents": 5000,
+    "currency": "usd",
+    "charge_status": "succeeded",
+    "created_at": 1698300000
+  },
+  {
+    "transaction_id": "PAYID-MIX001",
+    "gross_amount": "88.00",
+    "currency_code": "EUR",
+    "payment_status": "Completed",
+    "time_created": "2024-04-01T12:00:00Z"
+  },
+  {
+    "reference_number": "TRF-MIX-001",
+    "transfer_amount": 200000,
+    "transfer_currency": "COP",
+    "status_code": "ACCP",
+    "value_date": "2024-04-02"
+  },
+  {
+    "unknown_field_1": "valor",
+    "unknown_field_2": 123,
+    "some_amount": 500
+  },
+  {
+    "charge_id": "",
+    "amount_cents": 1000,
+    "currency": "usd",
+    "charge_status": "succeeded",
+    "created_at": 1698400000
+  }
+]

@@ -1,0 +1,48 @@
+{
+  "transactions": [
+    {
+      "charge_id": "ch_3abc001",
+      "amount_cents": 15000,
+      "currency": "usd",
+      "charge_status": "succeeded",
+      "created_at": 1698000000,
+      "customer_email": "alice@example.com",
+      "payment_method": "card_visa"
+    },
+    {
+      "charge_id": "ch_3abc002",
+      "amount_cents": 7500,
+      "currency": "usd",
+      "charge_status": "pending",
+      "created_at": 1698050000,
+      "customer_email": "bob@example.com",
+      "payment_method": "card_mastercard"
+    },
+    {
+      "charge_id": "ch_3abc003",
+      "amount_cents": 32000,
+      "currency": "eur",
+      "charge_status": "failed",
+      "created_at": 1698100000,
+      "customer_email": "carol@example.com",
+      "payment_method": "card_amex",
+      "failure_reason": "insufficient_funds"
+    },
+    {
+      "charge_id": "ch_3abc004",
+      "amount_cents": 9900,
+      "currency": "usd",
+      "charge_status": "refunded",
+      "created_at": 1698150000,
+      "customer_email": "dave@example.com",
+      "payment_method": "card_visa"
+    },
+    {
+      "charge_id": "ch_3abc005",
+      "amount_cents": -100,
+      "currency": "usd",
+      "charge_status": "succeeded",
+      "created_at": 1698200000
+    }
+  ]
+}
