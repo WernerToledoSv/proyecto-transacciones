@@ -80,14 +80,19 @@ La carpeta [`backend/samples/`](backend/samples/) contiene archivos de ejemplo e
 
 Incluye ejemplos de transferencias bancarias, PayPal, Stripe, transacciones mixtas y datos sin estructurar. También contiene registros inválidos para comprobar el funcionamiento de las validaciones.
 
-Para utilizarlos:
+**Puedes cargar estos archivos directamente desde el frontend**, sin necesidad de utilizar Swagger ni enviar la petición manualmente:
 
-1. Inicia el backend.
-2. Abre Swagger en `http://localhost:8000/docs` o utiliza directamente el endpoint `POST /api/v1/upload/`.
-3. Selecciona uno o varios archivos de `backend/samples/` para cargarlos y probar el procesamiento.
+1. Inicia el backend y el frontend siguiendo los pasos de instalación y ejecución.
+2. Abre la aplicación en [`http://localhost:4200`](http://localhost:4200).
+3. En el menú lateral, entra en **Cargar archivos** (ruta `/upload`).
+4. Selecciona los archivos de `backend/samples/` desde tu equipo o arrástralos al área de carga.
+5. Haz clic en **Procesar archivos**. La pantalla mostrará el resumen de transacciones válidas e inválidas y el resultado de cada archivo.
+
+La vista **Cargar archivos** permite seleccionar o arrastrar varios archivos `.json` o `.txt` con contenido en formato JSON, con un límite de 10 MB por archivo.
+
+También puedes utilizar Swagger en `http://localhost:8000/docs` y el endpoint `POST /api/v1/upload/` si deseas probar la API directamente.
 
 **Nota:** los archivos con ejemplos inválidos están destinados a probar las validaciones; por ello, algunos registros pueden ser rechazados o reportados como inválidos.
-
 ---
 
 ## 2. Frontend
