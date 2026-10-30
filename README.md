@@ -24,6 +24,7 @@ proyecto-transacciones/
 │   │   ├── rules/            # Reglas de moneda, fechas y estados
 │   │   ├── services/         # Procesamiento y almacenamiento en memoria
 │   │   └── validators/       # Validaciones del dominio
+│   ├── samples/              # Datos de ejemplo para probar la carga
 │   ├── main.py               # Punto de entrada del backend
 │   ├── requirements.txt      # Dependencias de Python
 │   ├── .env.example          # Variables de entorno
@@ -72,6 +73,20 @@ uvicorn main:app --reload --host 0.0.0.0 --port 8000
 - API base: `http://localhost:8000`
 - Swagger: `http://localhost:8000/docs`
 - ReDoc: `http://localhost:8000/redoc`
+
+### Archivos de ejemplo (samples)
+
+La carpeta [`backend/samples/`](backend/samples/) contiene archivos de ejemplo en formato JSON y TXT que sirven para probar la carga y el procesamiento de transacciones desde distintas fuentes.
+
+Incluye ejemplos de transferencias bancarias, PayPal, Stripe, transacciones mixtas y datos sin estructurar. También contiene registros inválidos para comprobar el funcionamiento de las validaciones.
+
+Para utilizarlos:
+
+1. Inicia el backend.
+2. Abre Swagger en `http://localhost:8000/docs` o utiliza directamente el endpoint `POST /api/v1/upload/`.
+3. Selecciona uno o varios archivos de `backend/samples/` para cargarlos y probar el procesamiento.
+
+**Nota:** los archivos con ejemplos inválidos están destinados a probar las validaciones; por ello, algunos registros pueden ser rechazados o reportados como inválidos.
 
 ---
 
@@ -155,6 +170,7 @@ El backend procesa cada registro en esta secuencia:
 ## 7. Referencias
 
 - Backend: [backend/README.md](backend/README.md)
+- Archivos de ejemplo: [backend/samples/](backend/samples/)
 - Código del proyecto: [backend/](backend)
 - Frontend: [frontend/](frontend)
 
