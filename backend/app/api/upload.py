@@ -1,25 +1,20 @@
 """
-Endpoint de carga y procesamiento de archivos JSON.
+Endpoint HTTP de carga de archivos JSON.
 
-POST /api/v1/upload
-  - Acepta uno o varios archivos JSON (multipart/form-data).
-  - Procesa cada archivo independientemente.
-  - Los resultados se acumulan en el store en memoria.
-  - Devuelve un resumen del procesamiento.
-
-Los errores de archivo individual no interrumpen el procesamiento de los demás.
+Esta capa se ocupa de recibir archivos, aplicar el límite de carga configurado
+y delegar el procesamiento al servicio de aplicación.
 """
 from __future__ import annotations
 
-from fastapi import APIRouter, File, UploadFile, status, HTTPException
 from typing import Annotated
 
-from app.models.responses import ApiResponse, ProcessingResponse, FileProcessingResult
+from fastapi import APIRouter, File, HTTPException, UploadFile, status
+
+from app.core.config import settings
+from app.models.responses import ApiResponse, FileProcessingResult, ProcessingResponse
 from app.services.processing_service import process_file
 
 router = APIRouter(prefix="/upload", tags=["Upload"])
-
-_MAX_FILE_SIZE_BYTES = 10 * 1024 * 1024  # 10 MB por archivo
 
 
 @router.post(
@@ -49,16 +44,9 @@ async def upload_files(
 
     for upload in files:
         filename = upload.filename or "sin_nombre.json"
-
-        # Validar content-type (advertencia no bloqueante)
-        content_type = upload.content_type or ""
-        if content_type and "json" not in content_type and "octet-stream" not in content_type:
-            # No bloqueamos — el contenido puede ser JSON aunque el tipo sea incorrecto
-            pass
-
         content = await upload.read()
 
-        if len(content) > _MAX_FILE_SIZE_BYTES:
+        if len(content) > settings.max_upload_file_size_bytes:
             file_results.append(
                 FileProcessingResult(
                     filename=filename,
@@ -66,8 +54,8 @@ async def upload_files(
                     valid=0,
                     invalid=0,
                     errors=[
-                        f"El archivo supera el límite de "
-                        f"{_MAX_FILE_SIZE_BYTES // (1024*1024)} MB."
+                        "El archivo supera el límite de "
+                        f"{settings.max_upload_file_size_mb} MB."
                     ],
                 )
             )
