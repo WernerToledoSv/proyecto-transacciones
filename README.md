@@ -191,7 +191,42 @@ Se separó el procesamiento individual de cada transacción de la orquestación 
 
 Se agregaron pruebas unitarias para el procesador de registros. Consulta [backend/README.md](backend/README.md) para conocer el detalle y cómo ejecutarlas.
 
-## 9. Referencias
+## 9. Pruebas unitarias
+
+El backend incluye pruebas unitarias para verificar el procesamiento individual de las transacciones. Estas pruebas comprueban que el sistema:
+
+- Identifique y rechace registros cuya fuente no puede determinarse.
+- Maneje los casos en los que una fuente no tiene un normalizador registrado.
+- Gestione errores durante la normalización.
+- Rechace transacciones que no cumplen las reglas de validación.
+- Devuelva correctamente una transacción válida sin guardarla directamente en el almacenamiento.
+
+### Cómo ejecutar las pruebas
+
+Abre una terminal en la carpeta raíz del proyecto y ejecuta:
+
+```powershell
+cd backend
+
+# Activar el entorno virtual (si ya fue creado)
+.\.venv\Scripts\Activate.ps1
+
+# Ejecutar todas las pruebas unitarias
+python -m unittest discover -s tests -v
+```
+
+Si todavía no has creado el entorno virtual, puedes prepararlo e instalar las dependencias antes de ejecutar las pruebas:
+
+```powershell
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+pip install -r requirements.txt
+python -m unittest discover -s tests -v
+```
+
+Las pruebas del procesador de registros se encuentran en `backend/tests/test_record_processor.py`. La opción `-v` muestra el nombre y el resultado de cada prueba. Si todas finalizan correctamente, al final aparecerá `OK`.
+
+## 10. Referencias
 
 - Backend: [backend/README.md](backend/README.md)
 - Archivos de ejemplo: [backend/samples/](backend/samples/)
