@@ -204,3 +204,33 @@ backend/
     ├── services/                  # Procesamiento y almacenamiento
     └── validators/                # Validación de transacciones
 ```
+
+
+## Refactorización del pipeline de procesamiento
+
+El procesamiento se separó en dos niveles para facilitar su reutilización y prueba:
+
+- `app/services/record_processor.py`: procesa un registro individual. Ejecuta detección, normalización y validación, y devuelve un resultado válido o un `InvalidRecord`. No lee archivos ni escribe en el almacenamiento.
+- `app/services/processing_service.py`: orquesta el archivo. Lee el JSON, recorre los registros, delega cada uno al procesador y persiste los resultados en el store.
+- `app/api/upload.py`: se limita a recibir los archivos, aplicar el tamaño máximo y llamar al servicio.
+- `app/core/config.py`: centraliza el límite de tamaño mediante `MAX_UPLOAD_FILE_SIZE_MB`.
+
+### Configuración del tamaño máximo
+
+En `.env` puedes definir, por ejemplo:
+
+```env
+MAX_UPLOAD_FILE_SIZE_MB=10
+```
+
+Si no defines la variable, se utiliza el valor predeterminado de 10 MB por archivo.
+
+### Pruebas unitarias
+
+Desde la carpeta `backend`, ejecuta:
+
+```bash
+python -m unittest discover -s tests -v
+```
+
+Las pruebas de `tests/test_record_processor.py` verifican detección desconocida, ausencia de normalizador, errores de normalización, errores de validación y procesamiento exitoso.
