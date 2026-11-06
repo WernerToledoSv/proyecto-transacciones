@@ -180,7 +180,18 @@ Los archivos de configuración están en [`.github/skills/`](.github/skills/) y 
 
 ---
 
-## 8. Referencias
+## 8. Refactorización del procesamiento
+
+Se separó el procesamiento individual de cada transacción de la orquestación del archivo:
+
+- `backend/app/services/record_processor.py`: detecta, normaliza y valida un registro sin guardar datos.
+- `backend/app/services/processing_service.py`: coordina la lectura del archivo, delega los registros y almacena los resultados.
+- `backend/app/api/upload.py`: recibe archivos y aplica el límite de tamaño configurado.
+- `backend/app/core/config.py`: centraliza el límite mediante `MAX_UPLOAD_FILE_SIZE_MB`.
+
+Se agregaron pruebas unitarias para el procesador de registros. Consulta [backend/README.md](backend/README.md) para conocer el detalle y cómo ejecutarlas.
+
+## 9. Referencias
 
 - Backend: [backend/README.md](backend/README.md)
 - Archivos de ejemplo: [backend/samples/](backend/samples/)
