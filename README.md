@@ -172,10 +172,17 @@ El backend procesa cada registro en esta secuencia:
 
 ---
 
-## 7. Referencias
+## 7. Personalización de GitHub Copilot
+
+El proyecto incluye Skills para detección de fuentes, normalización, validación, métricas, análisis y documentación de cambios, además del agente personalizado **Coordinador de Transacciones**. Estas instrucciones ayudan a Copilot Chat a trabajar con la arquitectura existente; no agregan agentes ejecutables al backend.
+
+Los archivos de configuración están en [`.github/skills/`](.github/skills/) y [`.github/agents/`](.github/agents/).
+
+---
+
+## 8. Referencias
 
 - Backend: [backend/README.md](backend/README.md)
 - Archivos de ejemplo: [backend/samples/](backend/samples/)
 - Código del proyecto: [backend/](backend)
 - Frontend: [frontend/](frontend)
-
