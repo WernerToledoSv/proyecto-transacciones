@@ -191,6 +191,36 @@ Se separó el procesamiento individual de cada transacción de la orquestación 
 
 Se agregaron pruebas unitarias para el procesador de registros. Consulta [backend/README.md](backend/README.md) para conocer el detalle y cómo ejecutarlas.
 
+### Origen de los cambios y merge de la tarea
+
+La refactorización se desarrolló en una rama independiente y después se integró a `main` mediante el **Pull Request #1: [Refactorizar pipeline de procesamiento de transacciones](https://github.com/WernerToledoSv/proyecto-transacciones/pull/1)**.
+
+| Dato | Información |
+|------|-------------|
+| Rama de origen (donde se trabajó) | `refactor/separacion-pipeline-procesamiento` |
+| Rama base (desde donde partió el trabajo) | `main` |
+| Commit base de `main` | [`36a8e26`](https://github.com/WernerToledoSv/proyecto-transacciones/commit/36a8e26c9a71c24cd65653160b4e8d175d4b506f) |
+| Rama de destino | `main` |
+| Pull Request | [PR #1](https://github.com/WernerToledoSv/proyecto-transacciones/pull/1) |
+| Estado | Cerrado y fusionado |
+| Fecha de merge | 6 de noviembre de 2026 |
+| Merge commit | [`79cc6ad`](https://github.com/WernerToledoSv/proyecto-transacciones/commit/79cc6ad2c3b77faa354c810d5c7375d5a3016dae) |
+
+**¿Qué había antes y qué cambió con esta rama?**
+
+El trabajo partió de la versión de `main` identificada por el commit `36a8e26`. En esa versión ya estaban incorporados el agente personalizado y las Skills de GitHub Copilot. La rama `refactor/separacion-pipeline-procesamiento` se creó a partir de ese estado para realizar la refactorización del backend; no reemplazó ni eliminó el trabajo previo de Skills y agente.
+
+Los cambios incorporados por el PR #1 fueron:
+
+1. **Separación del procesamiento por registro:** se creó `backend/app/services/record_processor.py`. La función `process_record()` se encarga de detectar la fuente, normalizar y validar una transacción. Devuelve un resultado válido o inválido, sin leer archivos ni guardar directamente en el almacenamiento.
+2. **Separación de la orquestación del archivo:** se modificó `backend/app/services/processing_service.py`. Ahora lee el archivo, recorre sus registros, llama a `process_record()` y guarda los resultados en el almacenamiento.
+3. **Responsabilidad del endpoint:** se reorganizó `backend/app/api/upload.py` para recibir los archivos, comprobar su tamaño y delegar el procesamiento al servicio.
+4. **Configuración centralizada:** se agregó `MAX_UPLOAD_FILE_SIZE_MB` en `backend/app/core/config.py` y en `backend/.env.example`. El límite predeterminado continúa siendo de 10 MB por archivo, pero ahora puede configurarse desde el entorno.
+5. **Pruebas unitarias:** se creó `backend/tests/test_record_processor.py` con cinco casos que verifican fuente desconocida, ausencia de normalizador, error de normalización, error de validación y procesamiento exitoso sin persistencia directa.
+6. **Documentación:** se actualizaron los README general y del backend para explicar la nueva separación, la configuración y la ejecución de las pruebas.
+
+En resumen, el cambio principal fue pasar de concentrar el procesamiento individual y la coordinación del archivo en un mismo servicio a separar esas responsabilidades. Esto facilita reutilizar y probar el procesamiento de cada transacción de forma aislada.
+
 ## 9. Pruebas unitarias
 
 El backend incluye pruebas unitarias para verificar el procesamiento individual de las transacciones. Estas pruebas comprueban que el sistema:
