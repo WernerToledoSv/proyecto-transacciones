@@ -43,6 +43,13 @@ proyecto-transacciones/
 
 ## 1. Backend
 
+### Implementación de la actividad
+
+- **Skills y agente personalizado:** agregados directamente en `main`, commit [`36a8e26`](https://github.com/WernerToledoSv/proyecto-transacciones/commit/36a8e26c9a71c24cd65653160b4e8d175d4b506f); no se utilizó PR para este cambio.
+- **Refactorización y pruebas:** desarrolladas en `refactor/separacion-pipeline-procesamiento` y fusionadas a `main` mediante el [PR #1](https://github.com/WernerToledoSv/proyecto-transacciones/pull/1).
+- Se separó el procesamiento por registro de la orquestación de archivos, se centralizó la configuración y se crearon seis Skills especializadas coordinadas por el agente personalizado.
+
+
 ### Requisitos
 
 - Python 3.12 o superior
