@@ -49,6 +49,9 @@ proyecto-transacciones/
 - **Refactorización y pruebas:** desarrolladas en `refactor/separacion-pipeline-procesamiento` y fusionadas a `main` mediante el [PR #1](https://github.com/WernerToledoSv/proyecto-transacciones/pull/1).
 - Se separó el procesamiento por registro de la orquestación de archivos, se centralizó la configuración y se crearon seis Skills especializadas coordinadas por el agente personalizado.
 
+---
+
+## 2. Ejecución del backend
 
 ### Requisitos
 
@@ -69,7 +72,7 @@ if (Test-Path .env.example) {
 }
 ```
 
-### Ejecución
+### Iniciar el servidor
 
 ```powershell
 cd C:\Users\USER\Desktop\proyecto-transacciones\backend
@@ -100,9 +103,10 @@ La vista **Cargar archivos** permite seleccionar o arrastrar varios archivos `.j
 También puedes utilizar Swagger en `http://localhost:8000/docs` y el endpoint `POST /api/v1/upload/` si deseas probar la API directamente.
 
 **Nota:** los archivos con ejemplos inválidos están destinados a probar las validaciones; por ello, algunos registros pueden ser rechazados o reportados como inválidos.
+
 ---
 
-## 2. Frontend
+## 3. Frontend
 
 ### Requisitos
 
@@ -134,7 +138,7 @@ npm run build:prod
 
 ---
 
-## 3. Flujo principal
+## 4. Flujo principal
 
 El backend procesa cada registro en esta secuencia:
 
@@ -146,7 +150,7 @@ El backend procesa cada registro en esta secuencia:
 
 ---
 
-## 4. Endpoints principales
+## 5. Endpoints principales
 
 | Método | Ruta | Descripción |
 |--------|------|-------------|
@@ -159,7 +163,7 @@ El backend procesa cada registro en esta secuencia:
 
 ---
 
-## 5. Variables de entorno
+## 6. Variables de entorno
 
 | Archivo | Descripción |
 |---------|-------------|
@@ -168,7 +172,7 @@ El backend procesa cada registro en esta secuencia:
 
 ---
 
-## 6. Tecnologías principales
+## 7. Tecnologías principales
 
 - FastAPI
 - Pydantic v2
@@ -179,15 +183,28 @@ El backend procesa cada registro en esta secuencia:
 
 ---
 
-## 7. Personalización de GitHub Copilot
+## 8. Personalización de GitHub Copilot
 
-El proyecto incluye Skills para detección de fuentes, normalización, validación, métricas, análisis y documentación de cambios, además del agente personalizado **Coordinador de Transacciones**. Estas instrucciones ayudan a Copilot Chat a trabajar con la arquitectura existente; no agregan agentes ejecutables al backend.
+El proyecto incluye seis Skills especializadas. Cada una contiene instrucciones para ayudar a GitHub Copilot Chat a realizar una tarea concreta respetando la arquitectura del proyecto:
 
-Los archivos de configuración están en [`.github/skills/`](.github/skills/) y [`.github/agents/`](.github/agents/).
+| Skill | Descripción |
+|-------|-------------|
+| `source-detection` | Identifica el origen de las transacciones, como Stripe, PayPal o transferencias bancarias. |
+| `transaction-normalization` | Guía la conversión de los datos de cada proveedor al formato común del sistema. |
+| `transaction-validation` | Define cómo comprobar que una transacción cumpla las reglas y requisitos del proyecto. |
+| `transaction-metrics` | Orienta el cálculo y la explicación de métricas y agrupaciones de transacciones. |
+| `transaction-analysis` | Ayuda a interpretar resultados, registros inválidos y resúmenes del procesamiento. |
+| `project-change-documentation` | Guía la revisión de cambios y la actualización de la documentación del proyecto. |
+
+### Agente Coordinador de Transacciones
+
+El agente personalizado **Coordinador de Transacciones** (`.github/agents/transaction-coordinator.agent.md`) actúa como punto de entrada para las tareas relacionadas con el procesamiento. Analiza la solicitud y selecciona las Skills necesarias para orientar el trabajo de Copilot, evitando concentrar todas las instrucciones en un único agente.
+
+Las Skills y el agente son configuraciones de GitHub Copilot Chat; no son agentes ejecutables dentro del backend. Sus archivos se encuentran en [`.github/skills/`](.github/skills/) y [`.github/agents/`](.github/agents/).
 
 ---
 
-## 8. Refactorización del procesamiento
+## 9. Refactorización del procesamiento
 
 Se separó el procesamiento individual de cada transacción de la orquestación del archivo:
 
@@ -196,18 +213,13 @@ Se separó el procesamiento individual de cada transacción de la orquestación 
 - `backend/app/api/upload.py`: recibe archivos y aplica el límite de tamaño configurado.
 - `backend/app/core/config.py`: centraliza el límite mediante `MAX_UPLOAD_FILE_SIZE_MB`.
 
-Se agregaron pruebas unitarias para el procesador de registros. Consulta [backend/README.md](backend/README.md) para conocer el detalle y cómo ejecutarlas.
+Esta separación permite mantener la lógica de cada registro independiente de la lectura de archivos y del almacenamiento.
 
+---
 
-## 9. Pruebas unitarias
+## 10. Pruebas unitarias
 
-El backend incluye pruebas unitarias para verificar el procesamiento individual de las transacciones. Estas pruebas comprueban que el sistema:
-
-- Identifique y rechace registros cuya fuente no puede determinarse.
-- Maneje los casos en los que una fuente no tiene un normalizador registrado.
-- Gestione errores durante la normalización.
-- Rechace transacciones que no cumplen las reglas de validación.
-- Devuelva correctamente una transacción válida sin guardarla directamente en el almacenamiento.
+Como parte de la refactorización se agregó `backend/tests/test_record_processor.py`, con cinco pruebas unitarias para comprobar el comportamiento de `record_processor.py` de forma independiente. Se verifican los casos de fuente desconocida, ausencia de normalizador, error de normalización, error de validación y procesamiento exitoso sin persistencia directa.
 
 ### Cómo ejecutar las pruebas
 
@@ -232,9 +244,11 @@ pip install -r requirements.txt
 python -m unittest discover -s tests -v
 ```
 
-Las pruebas del procesador de registros se encuentran en `backend/tests/test_record_processor.py`. La opción `-v` muestra el nombre y el resultado de cada prueba. Si todas finalizan correctamente, al final aparecerá `OK`.
+La opción `-v` muestra el nombre y el resultado de cada prueba. Si todas finalizan correctamente, al final aparecerá `OK`.
 
-## 10. Referencias
+---
+
+## 11. Referencias
 
 - Backend: [backend/README.md](backend/README.md)
 - Archivos de ejemplo: [backend/samples/](backend/samples/)
