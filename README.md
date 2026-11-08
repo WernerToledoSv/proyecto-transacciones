@@ -13,6 +13,16 @@ Aplicación full-stack para gestionar transacciones financieras detectadas desde
 
 ```text
 proyecto-transacciones/
+├── .github/
+│   ├── agents/
+│   │   └── transaction-coordinator.agent.md  # Agente Coordinador de Transacciones
+│   └── skills/
+│       ├── project-change-documentation/     # Documentación de cambios
+│       ├── source-detection/                  # Detección de fuentes
+│       ├── transaction-analysis/              # Análisis de transacciones
+│       ├── transaction-metrics/               # Métricas de transacciones
+│       ├── transaction-normalization/         # Normalización de transacciones
+│       └── transaction-validation/            # Validación de transacciones
 ├── backend/                  # API REST con FastAPI
 │   ├── app/
 │   │   ├── api/              # Endpoints HTTP
